@@ -248,7 +248,7 @@ function icon_map() {
       icon_result=":gear:"
       ;;
  "Ghostty" | "ghostty")
-      icon_result="󱙝"
+      icon_result=":terminal:"
       ;;
  "GitHub Desktop")
       icon_result=":git_hub:"

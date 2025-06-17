@@ -15,21 +15,7 @@ after-login-command = []
 
 after-startup-command = [
     'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
-    'workspace 6',
-    'move-workspace-to-monitor --wrap-around next',
-    'workspace-back-and-forth',
-    'workspace 7',
-    'move-workspace-to-monitor --wrap-around next',
-    'workspace-back-and-forth',
-    'workspace 8',
-    'move-workspace-to-monitor --wrap-around next',
-    'workspace-back-and-forth',
-    'workspace 9',
-    'move-workspace-to-monitor --wrap-around next',
-    'workspace-back-and-forth',
-    'workspace 10',
-    'move-workspace-to-monitor --wrap-around next',
-    'workspace-back-and-forth',
+    'exec-and-forget sketchybar',
 ]
 
 exec-on-workspace-change = [
@@ -134,8 +120,9 @@ ctrl-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 
-ctrl-m = 'workspace mail'
-ctrl-comma = 'workspace ferd'
+ctrl-m = 'workspace M'
+ctrl-n = 'workspace m'
+ctrl-comma = 'workspace F'
 ctrl-1 = 'workspace 1'
 ctrl-2 = 'workspace 2'
 ctrl-3 = 'workspace 3'
@@ -146,6 +133,10 @@ ctrl-7 = 'workspace 7'
 ctrl-8 = 'workspace 8'
 ctrl-9 = 'workspace 9'
 ctrl-0 = 'workspace 10'
+
+ctrl-f = 'move-node-to-workspace next --focus-follows-window'
+ctrl-s = 'move-node-to-workspace prev --focus-follows-window'
+
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 ctrl-shift-c = [
@@ -164,8 +155,9 @@ ctrl-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 ctrl-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 ctrl-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 ctrl-shift-0 = ['move-node-to-workspace 10', 'workspace 10']
-ctrl-shift-m = ['move-node-to-workspace mail', 'workspace mail']
-ctrl-shift-comma = ['move-node-to-workspace ferd', 'workspace ferd']
+ctrl-shift-m = ['move-node-to-workspace M', 'workspace M']
+ctrl-shift-n = ['move-node-to-workspace m', 'workspace m']
+ctrl-shift-comma = ['move-node-to-workspace F', 'workspace F']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 ctrl-tab = 'workspace-back-and-forth'
@@ -179,8 +171,10 @@ alt-ctrl-shift-k = ['join-with up', 'mode main']
 alt-ctrl-shift-l = ['join-with right', 'mode main']
 
 ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-ctrl-shift-f = 'exec-and-forget open -n /Applications/Floorp.app'
+ctrl-shift-f = ['exec-and-forget open -n /Applications/Floorp.app']
+ctrl-shift-y = ['exec-and-forget open -n /Applications/Cog.app']
 ctrl-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
+
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 ctrl-shift-semicolon = 'mode service'
@@ -195,9 +189,12 @@ ctrl-shift-semicolon = ['fullscreen', 'mode main']
 
 
 [[on-window-detected]]
+if.app-id = "org.cogx.cog"
+run = ['move-node-to-workspace m']
+[[on-window-detected]]
 if.app-id = "org.mozilla.thunderbird"
-run = ['move-node-to-workspace mail']
+run = ['move-node-to-workspace M']
 
 [[on-window-detected]]
 if.app-id = "org.ferdium.ferdium-app"
-run = ['move-node-to-workspace ferd']
+run = ['move-node-to-workspace F']
