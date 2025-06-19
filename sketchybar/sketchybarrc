@@ -19,9 +19,10 @@ sketchybar --bar position=top height=30 color="$BAR_BACKGROUND"
 # For a full list of all available item properties see:
 # https://felixkratz.github.io/SketchyBar/config/items
 
+
 default=(
-  padding_left=5
-  padding_right=5
+  padding_left=0
+  padding_right=0
   icon.font="Hack Nerd Font:Bold:12.0"
   label.font="MonaspiceAr NFM:Italic:12.0"
   icon.color="$TEXT_GREY"
@@ -31,32 +32,36 @@ default=(
   label.padding_left=4
   label.padding_right=4
   updates=on
-  y_offset=0
+  y_offset=-5
 )
+
 sketchybar --default "${default[@]}"
 
-sketchybar --add item spacePaddingLeft left --set spacePaddingLeft padding_left=-18
+
+# sketchybar --add item spacePaddingLeft right --set spacePaddingLeft padding_left=-18
 
 ##### Adding aeropsace layouts #####
 # Add the aerospace_workspace_change event we specified in aerospace.toml
 sketchybar --add event aerospace_workspace_change
 
-# This only works for single monitor configs!
+# for monitor 1 
 for sid in $(aerospace list-workspaces --monitor 1); do
   #for sid in "${SPACE_IDS[@]}"; do
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
     --set space.$sid \
     drawing=off \
+    background.color=$LIGHT_GREY \
     background.corner_radius=0 \
-    background.drawing=on \
-    background.padding_right=5 \
-    background.padding_left=5 \
+    background.drawing=off \
+    background.padding_right=0 \
+    background.padding_left=0 \
     icon="$sid" \
     icon.shadow.drawing=off \
-    icon.padding_left=10 \
-    label.font="sketchybar-app-font:Regular:12.0" \
-    label.padding_right=20 \
+    icon.padding_left=0 \
+    label.font="sketchybar-app-font:Regular:8.0" \
+    label.color=$LIGHT_GREY \
+    label.padding_right=24 \
     label.padding_left=0 \
     label.y_offset=-1 \
     label.shadow.drawing=off \
@@ -64,10 +69,12 @@ for sid in $(aerospace list-workspaces --monitor 1); do
     script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
+
+
 # Load Icons on startup
 for sid in $(aerospace list-workspaces --monitor 1 --empty no); do
   apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
+  
   sketchybar --set space.$sid drawing=on
 
   icon_strip=" "
@@ -105,8 +112,19 @@ sketchybar --add item space_separator q \
 # volume.sh script is only executed once an actual change in system audio
 # volume is registered. More info about the event system can be found here:
 # https://felixkratz.github.io/SketchyBar/config/events
+#
+swift run plugins/menuanywhere.swift
 
-sketchybar --add item clock right \
+sketchybar \
+  --add item battery right \
+  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
+  --subscribe battery system_woke power_source_change \
+  \
+  --add item calendar right \
+  --set calendar update_freq=10 script="$PLUGIN_DIR/calendar.sh" \
+  label.font="MonaspiceAr NFM:Regular:12.0" \
+  \
+  --add item clock right \
   --set clock update_freq=10 script="$PLUGIN_DIR/clock.sh" \
   label.font="MonaspiceAr NFM:Regular:12.0" \
   \
@@ -114,9 +132,6 @@ sketchybar --add item clock right \
   --set volume script="$PLUGIN_DIR/volume.sh" \
   --subscribe volume volume_change \
   \
-  --add item battery right \
-  --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-  --subscribe battery system_woke power_source_change \
   \
   --add item wifi right \
   --set wifi script="$PLUGIN_DIR/wifi.sh" label.font="MonaspiceAr NFM:Italic:12.0" \
@@ -151,6 +166,9 @@ sketchybar --add bracket spaces '/space\..*/' spacePaddingLeft spacePaddingRight
   background.corner_radius=10 \
   background.height=30
 
+
+
+
 sketchybar --add bracket statsDisplay swap Stats \
   --set statsDisplay \
   background.drawing=on \
@@ -162,7 +180,7 @@ sketchybar --add bracket rightItems volume battery wifi \
   background.height=30 \
   padding_right=40
 
-sketchybar --add bracket calander clock \
+sketchybar --add bracket calendar clock \
   --set clocks
 
 ##### Force all scripts to run the first time (never do this in a script) #####

@@ -16,6 +16,21 @@ after-login-command = []
 after-startup-command = [
     'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0',
     'exec-and-forget sketchybar',
+    # 'workspace 6',
+    # 'move-workspace-to-monitor --wrap-around next',
+    # 'workspace-back-and-forth',
+    # 'workspace 7',
+    # 'move-workspace-to-monitor --wrap-around next',
+    # 'workspace-back-and-forth',
+    # 'workspace 8',
+    # 'move-workspace-to-monitor --wrap-around next',
+    # 'workspace-back-and-forth',
+    # 'workspace 9',
+    # 'move-workspace-to-monitor --wrap-around next',
+    # 'workspace-back-and-forth',
+    # 'workspace 10',
+    # 'move-workspace-to-monitor --wrap-around next',
+    # 'workspace-back-and-forth',
 ]
 
 exec-on-workspace-change = [
@@ -51,7 +66,7 @@ key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # on-focus-changed = ['move-mouse window-lazy-center']
 
-# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# Gaps between windows (inner-*) and between monitor edges (outer-*).a
 # Possible values:
 # - Constant:     gaps.outer.top = 8
 # - Per monitor:  gaps.outer.top = [{ monitor.main = 16 }, { monitor."some-pattern" = 32 }, 24]
@@ -59,12 +74,12 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 10
-inner.vertical = 10
-outer.left = 20
-outer.bottom = 20
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.right = 8
+outer.bottom = 8
 outer.top = [{ monitor."VP3268-4K" = 44 }, 14] # 14
-outer.right = 20
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
 [exec] # Again, you don't need to copy all config sections to your config.
@@ -134,9 +149,11 @@ ctrl-8 = 'workspace 8'
 ctrl-9 = 'workspace 9'
 ctrl-0 = 'workspace 10'
 
-ctrl-f = 'move-node-to-workspace next --focus-follows-window'
-ctrl-s = 'move-node-to-workspace prev --focus-follows-window'
+ctrl-shift-f = 'move-node-to-workspace next --wrap-around --focus-follows-window'
+ctrl-shift-s = 'move-node-to-workspace prev --wrap-around --focus-follows-window'
 
+ctrl-f = "workspace next --wrap-around"
+ctrl-s = "workspace prev --wrap-around"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 ctrl-shift-c = [
@@ -171,7 +188,7 @@ alt-ctrl-shift-k = ['join-with up', 'mode main']
 alt-ctrl-shift-l = ['join-with right', 'mode main']
 
 ctrl-shift-enter = 'exec-and-forget open -n /Applications/Ghostty.app'
-ctrl-shift-f = ['exec-and-forget open -n /Applications/Floorp.app']
+ctrl-shift-space = ['exec-and-forget open -n /Applications/Floorp.app']
 ctrl-shift-y = ['exec-and-forget open -n /Applications/Cog.app']
 ctrl-shift-r = ['exec-and-forget /opt/homebrew/bin/sketchybar --reload']
 
