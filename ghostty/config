@@ -28,6 +28,13 @@ confirm-close-surface = true
 # keybind = ctrl+a>
 #
 
+
+
+keybind = ctrl+alt+down=scroll_page_down
+keybind = ctrl+alt+up=scroll_page_up
+keybind = ctrl+alt+h=scroll_to_top
+keybind = ctrl+alt+l=scroll_to_bottom
+
 keybind = global:ctrl+p=toggle_quick_terminal
 cursor-style =  bar 
 cursor-style-blink = true

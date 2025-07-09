@@ -36,6 +36,7 @@ sketchybar --add event aerospace_workspace_change
 
 # for all monitors 
 for sid in $(aerospace list-workspaces --monitor all); do
+
   #for sid in "${SPACE_IDS[@]}"; do
   sketchybar --add item space.$sid left \
     --subscribe space.$sid aerospace_workspace_change \
@@ -62,7 +63,7 @@ done
 
 
 # Load Icons on startup
-for sid in $(aerospace list-workspaces --monitor 1 --empty no); do
+for sid in $(aerospace list-workspaces --monitor all --empty no); do
   apps=$(aerospace list-windows --workspace "$sid" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
   
   sketchybar --set space.$sid drawing=on
